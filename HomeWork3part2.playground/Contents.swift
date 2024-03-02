@@ -93,9 +93,8 @@ class Cart {
     }
     
     func clear() {
-        for index in 0 ... products.count {
-            products.remove(at: index)
-        }
+        products.removeAll()
+        
     }
     
     func totalPrice() -> Double {
@@ -208,18 +207,24 @@ class Screen {
             resultStringToPrint += product.textDescription()
         }
         
-        resultStringToPrint += separatorLine
-        
-        resultStringToPrint += "\nTotal price: \(String(format: "%.2f", cart.totalPrice())) UAH"
-        resultStringToPrint += "\nDiscount: \(cart.discountPercentValue())%"
-        
-        resultStringToPrint += separatorLine
-        
-        resultStringToPrint += "\nTotal price with Discount:\n\(String(format: "%.2f", cart.totalPriceWithDiscount())) UAH"
-        
-        resultStringToPrint += separatorLine + separatorLine
-        
-        print(resultStringToPrint)
+        if !cart.products.isEmpty {
+            
+            resultStringToPrint += separatorLine
+            
+            resultStringToPrint += "\nTotal price: \(String(format: "%.2f", cart.totalPrice())) UAH"
+            resultStringToPrint += "\nDiscount: \(cart.discountPercentValue())%"
+            
+            resultStringToPrint += separatorLine
+            
+            resultStringToPrint += "\nTotal price with Discount:\n\(String(format: "%.2f", cart.totalPriceWithDiscount())) UAH"
+            
+            resultStringToPrint += separatorLine + separatorLine
+            
+            print(resultStringToPrint)}
+        if cart.products.isEmpty {
+            print("Кошик пустий. Для оформлення замовлення додайте хоча б один товар")
+    }
+    
     }
     
     func printCart(cart: Cart, currency: Currency) {
@@ -359,7 +364,7 @@ screen.printCheck(cart: cart)
 
 // Початок коду сценарію для Пункт 2
 
-/*
+
  
 print("\nSCENARIO 2:\n")
 
@@ -371,7 +376,7 @@ cart.clear()
 // Користувач натискає кнопку "Оформити замовлення", щоб побачити чек
 screen.printCheck(cart: cart)
 
- */
+ 
 
 // Кінець коду сценарію для Пункт 2
 
